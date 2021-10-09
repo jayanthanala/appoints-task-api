@@ -34,22 +34,8 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(result)
 }
 
-func GetPostsByUserId(w http.ResponseWriter, r *http.Request, userId string) {
-	// if err == nil {
-	// 	// valid value for postId
-	// 	for _, v := range posts {
-	// 		if v.CreatedBy == userId {
-	// 			userPosts = append(userPosts, v)
-	// 		}
-	// 	}
-	// 	json.NewEncoder(w).Encode(userPosts)
-	// 	return
-	// 	// no post with id!!
-	// }
-}
-
 func GetPostById(w http.ResponseWriter, r *http.Request, postIdString string) {
-	fmt.Println("IN GET OF POST WITH POSTID")
+	//fmt.Println("IN GET OF POST WITH POSTID")
 	var post m.Post
 	collection := c.Client.Database("golangrestapi").Collection("posts")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
