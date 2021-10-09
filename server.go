@@ -10,11 +10,9 @@ import (
 	"strings"
 )
 
-// var users []User
-// var posts []Post
 
 func Homepage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Homepage is hit")
+	fmt.Fprintf(w, "Homepage")
 }
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
@@ -38,7 +36,7 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 		parsed := strings.Split(r.URL.Path, "/")
 		fmt.Println(parsed, len(parsed), parsed[0], parsed[1])
 		if len(parsed) == 4 && parsed[2] == "users" {
-			fmt.Println("IN GET OF POST WITH USERID")
+			//fmt.Println("IN GET OF POST WITH USERID")
 			controllers.GetPostsByUserId(w, r, parsed[3])
 		} else {
 			controller.GetPostById(w, r, parsed[2])
@@ -51,10 +49,8 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 }
 func main() {
 	c.ConnectDB()
-	fmt.Println("Successfully connected to database")
+	fmt.Println("Successfully connected to db")
 	http.HandleFunc("/users/", UserHandler)
 	http.HandleFunc("/posts/", PostHandler)
-
-	//http.HandleFunc("/", Homepage)
 	log.Fatal(http.ListenAndServe(":3000", nil))
 }
